@@ -94,7 +94,6 @@ int main(){
 				if(jaque) break;
 			}
 		}
-		
 		if(jaque){
 			cout<<"SI"<<endl;
 			break;
