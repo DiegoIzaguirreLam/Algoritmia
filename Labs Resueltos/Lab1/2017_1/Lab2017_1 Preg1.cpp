@@ -14,7 +14,7 @@ T 3 3
 A 1 5
 */
 #include <iostream>
-#define MAX 1000000000
+#define MAX 100
 using namespace std;
 int m[8][2];// en el peor caso (caballo), hay 8 posibles movimientos
 
