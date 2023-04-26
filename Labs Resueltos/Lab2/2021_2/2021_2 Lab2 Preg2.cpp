@@ -21,13 +21,10 @@ int columna(int alma[][MAX], int n, int x, int y){
 }
 
 int peso(int alma[][MAX], int n, int m, int x){
-	int cuenta=0;
+	int cuenta;
 	if(x>=m-1) return cuenta;
-	cuenta+=linea(alma, n, x, 0);
-	cuenta+=columna(alma,m,x,n-1);
-	cout<<"Ruta "<<x+1<<": "<<cuenta<<endl;
-	peso(alma, n-1, m, x+1);
-	return cuenta;
+	cuenta=linea(alma, n, x, 0)+columna(alma,m,x,n-1);
+	return max(cuenta, peso(alma, n-1, m, x+1));
 }
 
 void linea_pedido(int alma[][MAX], int n, int x, int y, int pesos[], int verifPesos[], int i){
