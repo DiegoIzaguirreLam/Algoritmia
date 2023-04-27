@@ -53,7 +53,7 @@ void imprimeCons(int cost[][MAXEMP], char emp[][MAXEMP], int cant, int numfase, 
 
 void eval(int P,int NF,int N,double porc[],int cost[][MAXEMP],char emp[][MAXEMP], int econ[], int cant[], int numfase, int ahorrado){
 	if(numfase==NF) return;
-	int monto = P*porc[numfase];//ayudaa
+	int monto = P*porc[numfase];
 	int maxPag=monto+ahorrado, costoReal=0;
 	ordenaAscoDesc(cost, emp, N, econ[numfase], numfase, 0);
 	
