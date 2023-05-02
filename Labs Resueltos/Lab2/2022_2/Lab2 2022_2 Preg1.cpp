@@ -1,3 +1,4 @@
+//Alumno: Diego Izaguirre Lam. Codigo: 20210529
 #include <iostream>
 #define MAXF 8
 #define MAXC 8

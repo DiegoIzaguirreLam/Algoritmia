@@ -1,3 +1,4 @@
+//Alumno: Diego Izaguirre Lam. Codigo: 20210529
 #include <iostream>
 #define MAX 7
 #define CAMINOINVALIDO 99999
@@ -62,11 +63,11 @@ int main(){
 	else{
 		cout<<"No es posible llegar al punto final"<<endl;
 	}
+	cout<<"Mapa de minas detectadas: "<<endl;
 	for(int i=0;i<n;i++){
 		for(int j=0;j<m;j++)
 			cout<<detecta[i][j]<<" ";
 		cout<<endl;
 	}
-	cout<<"---------------------"<<endl;
 	return 0;
 }
