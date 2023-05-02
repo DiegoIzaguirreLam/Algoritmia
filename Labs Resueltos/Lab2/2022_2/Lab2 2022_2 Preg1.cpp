@@ -4,9 +4,7 @@
 using namespace std;
 
 int almacena(int M[][MAXC], int F, int C, int P, int fila, int a, int b){
-	if(fila>=F){
-		return 0;
-	}
+	if(fila>=F)	return 0;
 	if(a<0) a=0;
 	if(b>=C) b=C-1;
 	for(int i=a;i<=b;i++)
