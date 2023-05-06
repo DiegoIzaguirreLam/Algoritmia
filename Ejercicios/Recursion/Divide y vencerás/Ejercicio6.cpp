@@ -46,8 +46,8 @@ void mergesort(int A[], int inicial, int final, int &inversiones){
 	
 
 int main(){
-	int A[]={1, 3, 5, 2, 4, 6, 4};
-	int i, n=7;
+	int A[]={1, 3, 5, 2, 4, 6};
+	int n=6;
 	int inversiones=0;
 	cout<<endl;
 	
