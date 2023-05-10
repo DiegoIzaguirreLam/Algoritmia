@@ -54,7 +54,7 @@ void fusiona(Lista &L1, Lista &L2){
         Nodo *p=L1.cabeza, *q=L2.cabeza, *aux, *aux2;
         int i=0;
         while(p!=NULL && q!=NULL){//se recorre solo la lista L1, por lo que la complejidad es O(n) como maximo
-            aux=p->sig;
+            aux=p->sig;//aux para no perder cual es el siguiente que debe recorrer
             if(p->elem.hora <= q->elem.hora && q->elem.hora<p->sig->elem.hora){//se compara cada valor de L2 con el de q1.
                 aux2=q->sig;
                 p->sig=q;
@@ -95,7 +95,6 @@ int main(int argc, char** argv) {
     construir(Mier);
     construir(Jue);
     construir(Vie);
-    //ingreso de datos
     Elemento e;//entrada de datos
     e.hora=8;e.sucursal=6;strcpy(e.dia,"Lunes");
     insertarFinal(Lun, e);
