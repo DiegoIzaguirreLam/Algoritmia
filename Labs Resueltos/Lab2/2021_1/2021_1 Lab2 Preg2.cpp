@@ -41,19 +41,17 @@ void evalua(int P,int C,int T,int B,int acc[][MAXEMP], char aux[][MAXEMP], int t
 	int flagComproDia=0;
 	ordena(acc, aux, C, dia, 0, tend[dia]);
 	cout<<dia+1<<"	"<<P<<"		";
-	for(int i=0;i<B;i++){
+	for(int i=0;i<B;i++){//iteracion para recorrer las empresas en un dia
 		if(P>=acc[dia][i]){
 			cout<<"("<<aux[dia][i]<<") "<<acc[dia][i]<<"		";
 			P=P-acc[dia][i];
 			(*invertido)+=acc[dia][i];
 			flagComproDia=1;
 		}
-		else{
-			if(!flagComproDia){
-				cout<<endl<<"Solo ha podido comprar acciones hasta el dia "<<dia+1<<", tiene "<<*invertido<<" dolares en acciones y le han quedado "<<P<<" dolar(es) de presupuesto"<<endl;
-				return;
-			}
-		}
+	}
+	if(!flagComproDia){
+		cout<<endl<<"Solo ha podido comprar acciones hasta el dia "<<dia<<", tiene "<<*invertido<<" dolares en acciones y le han quedado "<<P<<" dolar(es) de presupuesto"<<endl;
+		return;
 	}
 	cout<<endl;
 	int flagSub;

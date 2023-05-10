@@ -1,7 +1,8 @@
 //Alumno: Diego Izaguirre Lam. Codigo: 20210529
 #include <iostream>
-#define MAXF 8
-#define MAXC 8
+#define MAXF 15
+#define MAXC 15
+
 using namespace std;
 
 int almacena(int M[][MAXC], int F, int C, int P, int fila, int a, int b){
@@ -29,12 +30,14 @@ int main(){
 	if(C%2!=0) cumple=almacena(M, F, C, P, 0, C/2, C/2);
 	else cumple=almacena(M, F, C, P, 0, C/2 - 1, C/2);
 	cout<<endl<<endl;
-	for(int i=0;i<F;i++){
-		for(int j=0;j<C;j++) cout<<M[i][j]<<" ";
-		cout<<endl;
-	}
-	if(cumple)
+
+	if(cumple){
+		for(int i=0;i<F;i++){
+			for(int j=0;j<C;j++) cout<<M[i][j]<<" ";
+			cout<<endl;
+		}
 		cout<<"Si es posible ordenar los productos"<<endl;
+	}
 	else
 		cout<<"No es posible utilizar este anaquel para la cantidad de productos solicitados"<<endl;
 	return 0;

@@ -1,7 +1,8 @@
 #include <iostream>
 
 using namespace std;
-
+// 1 1 2 2 3 3 4 5 5
+// 1 1 2 3 3 4 4
 void solitario(int arr[], int ini, int fin){
     if(ini==fin){
         cout<<"El numero que no se repite es: "<<arr[ini]<<endl;

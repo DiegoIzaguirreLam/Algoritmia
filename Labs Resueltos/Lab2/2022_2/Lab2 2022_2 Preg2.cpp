@@ -21,9 +21,7 @@ int min(int num1, int num2){
 
 int robot(int n, int m, char campo[][MAX], int x, int y, int cont, char detecta[][MAX]){
 	if(x>=n || y>=m) return CAMINOINVALIDO;
-	if(x==n-1 && y==m-1){
-		return cont;
-	}
+	if(x==n-1 && y==m-1) return cont;
 	if(campo[x][y]=='*'){
 		detecta[x][y]='*';
 		return CAMINOINVALIDO;

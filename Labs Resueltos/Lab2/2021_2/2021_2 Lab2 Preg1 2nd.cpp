@@ -37,18 +37,18 @@ void ordenaAscoDesc(int cost[][MAXEMP], char emp[][MAXEMP], int N, int flagEcon,
 	ordenaAscoDesc(cost, emp, N, flagEcon, numfase, i+1);
 }
 
-void imprimeCons(int cost[][MAXEMP], char emp[][MAXEMP], int cant, int numfase, int i, int *costoReal, int maxPag){
+void imprimeCons(int cost[][MAXEMP], char emp[][MAXEMP], int cant, int numfase, int i, int *costoReal, int maxPag){//ya teniendo las empresas ordenadas segun se necesite, se selecciona, imprime y resta el monto disponible
 	if(cant==i) return;
 	if(maxPag>cost[numfase][i]){
 		cout << emp[numfase][i]<<", ";
 		(*costoReal) += cost[numfase][i];
-		imprimeCons(cost, emp, cant, numfase, i+1, costoReal, maxPag);
-		maxPag-=cost[numfase][i];
+		maxPag-=cost[numfase][i];//se reduce el monto que se tiene para pagar para las siguientes empresas de la fase
+		imprimeCons(cost, emp, cant, numfase, i+1, costoReal, maxPag);//se aumenta 1 empresa elegida
 	}
 	else{
-		imprimeCons(cost, emp, cant+1, numfase, i+1, costoReal,maxPag);
+		imprimeCons(cost, emp, cant+1, numfase, i+1, costoReal,maxPag);//se le suma 1 a cant para que no cambie el numero de empresas que faltan por elegir. (ya que siempre se le suma 1 a i)
 	}
-}
+}//tambien podria hacerse con otro parametro que lleve el numero de empresas seleccionadas
 
 
 void eval(int P,int NF,int N,double porc[],int cost[][MAXEMP],char emp[][MAXEMP], int econ[], int cant[], int numfase, int ahorrado){
