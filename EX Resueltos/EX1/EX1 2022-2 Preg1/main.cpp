@@ -60,7 +60,6 @@ void fusiona(Lista &L1, Lista &L2){
         int i=0;
         
         while(p!=NULL && q!=NULL){//se recorre solo la lista L1, por lo que la complejidad es O(n) como maximo
-            aux=p->sig;//aux para no perder cual es el siguiente que debe recorrer
             if(p==L1.cabeza && p->elem.hora>q->elem.hora){//en caso el elemento deba ir al comienzo
                 aux2=q->sig;
                 L1.cabeza=q;
@@ -68,15 +67,16 @@ void fusiona(Lista &L1, Lista &L2){
                 q=aux2;
                 L1.longitud++;
             }
-            else if(p!=L1.ultimo && p->elem.hora <= q->elem.hora && (q->elem.hora<p->sig->elem.hora) ){//se compara cada valor de L2 con el de q1.
-                aux2=q->sig;
+            else if(p!=L1.ultimo && p->elem.hora <= q->elem.hora && q->elem.hora<p->sig->elem.hora){//se compara cada valor de L2 con el de q1.
+                aux=p->sig;
+                aux2=q->sig;//aux para no perder cual es el siguiente valor que debe ser insertado
                 p->sig=q;
                 q->sig=aux;
                 q=aux2;
                 i++;
                 L1.longitud++;
             }
-            else p=aux;
+            p=p->sig;
         }
         if(q!=NULL){//en caso termine de recorrer la Lista L1 y aun hay elementos sin colocar, estos deben ir al final de la lista L1:
             L1.ultimo->sig=q;
