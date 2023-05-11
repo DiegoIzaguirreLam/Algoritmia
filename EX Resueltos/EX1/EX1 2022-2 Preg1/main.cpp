@@ -50,19 +50,33 @@ void fusiona(Lista &L1, Lista &L2){
         L1.ultimo=L2.ultimo;
         L1.longitud+=L2.longitud;
     }
+    else if(L1.cabeza->elem.hora > L2.ultimo->elem.hora){//L2 debe ir antes de L1
+        L2.ultimo->sig=L1.cabeza;
+        L1.cabeza=L2.cabeza;
+        L1.longitud+=L2.longitud;
+    }
     else{
         Nodo *p=L1.cabeza, *q=L2.cabeza, *aux, *aux2;
         int i=0;
+        
         while(p!=NULL && q!=NULL){//se recorre solo la lista L1, por lo que la complejidad es O(n) como maximo
             aux=p->sig;//aux para no perder cual es el siguiente que debe recorrer
-            if(p->elem.hora <= q->elem.hora && q->elem.hora<p->sig->elem.hora){//se compara cada valor de L2 con el de q1.
+            if(p==L1.cabeza && p->elem.hora>q->elem.hora){//en caso el elemento deba ir al comienzo
+                aux2=q->sig;
+                L1.cabeza=q;
+                q->sig=p;
+                q=aux2;
+                L1.longitud++;
+            }
+            else if(p!=L1.ultimo && p->elem.hora <= q->elem.hora && (q->elem.hora<p->sig->elem.hora) ){//se compara cada valor de L2 con el de q1.
                 aux2=q->sig;
                 p->sig=q;
                 q->sig=aux;
                 q=aux2;
                 i++;
+                L1.longitud++;
             }
-            p=aux;
+            else p=aux;
         }
         if(q!=NULL){//en caso termine de recorrer la Lista L1 y aun hay elementos sin colocar, estos deben ir al final de la lista L1:
             L1.ultimo->sig=q;
@@ -96,16 +110,21 @@ int main(int argc, char** argv) {
     construir(Jue);
     construir(Vie);
     Elemento e;//entrada de datos
+    
+    e.hora=7;e.sucursal=15;strcpy(e.dia,"Lunes");
+    insertarFinal(Lun, e);
     e.hora=8;e.sucursal=6;strcpy(e.dia,"Lunes");
     insertarFinal(Lun, e);
     e.hora=10;e.sucursal=14;strcpy(e.dia,"Lunes");
     insertarFinal(Lun, e);
     e.hora=12;e.sucursal=1;strcpy(e.dia,"Lunes");
     insertarFinal(Lun, e);
+    e.hora=13;e.sucursal=7;strcpy(e.dia,"Lunes");
+    insertarFinal(Lun, e);
     
-    e.hora=9;e.sucursal=3;strcpy(e.dia,"Martes");
+    e.hora=4;e.sucursal=19;strcpy(e.dia,"Martes");
     insertarFinal(Mar, e);
-    e.hora=11;e.sucursal=8;strcpy(e.dia,"Martes");
+    e.hora=5;e.sucursal=3;strcpy(e.dia,"Martes");
     insertarFinal(Mar, e);
     
     e.hora=8;e.sucursal=2;strcpy(e.dia,"Miercoles");
@@ -116,18 +135,18 @@ int main(int argc, char** argv) {
     insertarFinal(Mier, e);
     
     
-    e.hora=15;e.sucursal=9;strcpy(e.dia,"Jueves");
+    e.hora=4;e.sucursal=2;strcpy(e.dia,"Jueves");
     insertarFinal(Jue, e);
-    e.hora=14;e.sucursal=13;strcpy(e.dia,"Jueves");
+    e.hora=5;e.sucursal=11;strcpy(e.dia,"Jueves");
     insertarFinal(Jue, e);
-    e.hora=16;e.sucursal=11;strcpy(e.dia,"Jueves");
-    insertarFinal(Jue, e);
-    
-    e.hora=18;e.sucursal=12;strcpy(e.dia,"Viernes");
+
+    e.hora=3;e.sucursal=12;strcpy(e.dia,"Viernes");
     insertarFinal(Vie, e);
-    e.hora=17;e.sucursal=4;strcpy(e.dia,"Viernes");
+    e.hora=14;e.sucursal=13;strcpy(e.dia,"Viernes");
     insertarFinal(Vie, e);
-    e.hora=19;e.sucursal=7;strcpy(e.dia,"Viernes");
+    e.hora=15;e.sucursal=9;strcpy(e.dia,"Viernes");
+    insertarFinal(Vie, e);
+    e.hora=16;e.sucursal=14;strcpy(e.dia,"Viernes");
     insertarFinal(Vie, e);
     
     //ordenar cada una de las listas
@@ -153,7 +172,42 @@ int main(int argc, char** argv) {
     fusiona(Lun, Vie); 
     mostrarSalida(Lun);//finalmente tenemos el resultado final en Lun
     
-    
     return 0;
 }
 
+
+    /*
+    e.hora=8;e.sucursal=6;strcpy(e.dia,"Lunes");
+    insertarFinal(Lun, e);
+    e.hora=10;e.sucursal=14;strcpy(e.dia,"Lunes");
+    insertarFinal(Lun, e);
+    e.hora=12;e.sucursal=1;strcpy(e.dia,"Lunes");
+    insertarFinal(Lun, e);
+    
+    e.hora=7;e.sucursal=3;strcpy(e.dia,"Martes");
+    insertarFinal(Mar, e);
+    e.hora=9;e.sucursal=8;strcpy(e.dia,"Martes");
+    insertarFinal(Mar, e);
+    
+    e.hora=8;e.sucursal=2;strcpy(e.dia,"Miercoles");
+    insertarFinal(Mier, e);
+    e.hora=9;e.sucursal=5;strcpy(e.dia,"Miercoles");
+    insertarFinal(Mier, e);
+    e.hora=10;e.sucursal=10;strcpy(e.dia,"Miercoles");
+    insertarFinal(Mier, e);
+    
+    
+    e.hora=15;e.sucursal=9;strcpy(e.dia,"Jueves");
+    insertarFinal(Jue, e);
+    e.hora=14;e.sucursal=13;strcpy(e.dia,"Jueves");
+    insertarFinal(Jue, e);
+    e.hora=16;e.sucursal=11;strcpy(e.dia,"Jueves");
+    insertarFinal(Jue, e);
+    
+    e.hora=18;e.sucursal=12;strcpy(e.dia,"Viernes");
+    insertarFinal(Vie, e);
+    e.hora=17;e.sucursal=4;strcpy(e.dia,"Viernes");
+    insertarFinal(Vie, e);
+    e.hora=19;e.sucursal=7;strcpy(e.dia,"Viernes");
+    insertarFinal(Vie, e);
+    */
