@@ -57,4 +57,3 @@ int main(int argc, char** argv) {
     detecta(frec, n);
     return 0;
 }
-

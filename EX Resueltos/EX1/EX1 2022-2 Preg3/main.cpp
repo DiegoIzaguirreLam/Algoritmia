@@ -17,9 +17,10 @@
 #include "listaSimple.h"
 using namespace std;
 
-void generaLista( Lista &L1, int n){
-    for(int i=2;i<=n;i++)
-        insertarFinal(L1, i);
+void generaLista( Lista &L1, int n, int i){
+    if(i>n) return;
+    insertarFinal(L1, i);
+    generaLista(L1, n, i+1);
 }
 
 void generaCola( Lista &L1, Nodo *p, Cola &C, int i){
@@ -29,9 +30,7 @@ void generaCola( Lista &L1, Nodo *p, Cola &C, int i){
     Nodo *sigAux=p->sig;
     if(p->elem%i == 0 && p->elem!=i){
         Elemento aux=p->elem;
-        
         encolar(&C, aux);
-        sigAux=p->sig;
         eliminar(&L1, aux);
     }
     generaCola(L1, sigAux, C, i);
@@ -61,7 +60,7 @@ int main(int argc, char** argv) {
     Lista L1;
     construir(L1);
     int n=15;
-    generaLista(L1, n);
+    generaLista(L1, n, 2);
     
     criba(L1, L1.cabeza, n);
     

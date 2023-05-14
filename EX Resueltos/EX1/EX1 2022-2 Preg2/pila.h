@@ -25,6 +25,7 @@ typedef struct nodoP
 typedef struct
 {
     NodoP* cima;
+    int peso;
     int longitud;
 } Pila;
 
