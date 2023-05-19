@@ -59,11 +59,11 @@ void fusiona(Lista &L1, Lista &L2){
         Nodo *p=L1.cabeza, *q=L2.cabeza, *aux, *aux2;
         int i=0;
         
-        while(p!=NULL && q!=NULL){//se recorre solo la lista L1, por lo que la complejidad es O(n) como maximo
+        while(p->sig!=NULL){//se recorre solo la lista L1, por lo que la complejidad es O(n) como maximo
             if(p==L1.cabeza && p->elem.hora>q->elem.hora){//en caso el elemento deba ir al comienzo
                 aux2=q->sig;
+                q->sig=L1.cabeza;
                 L1.cabeza=q;
-                q->sig=p;
                 q=aux2;
                 L1.longitud++;
             }
@@ -76,6 +76,7 @@ void fusiona(Lista &L1, Lista &L2){
                 i++;
                 L1.longitud++;
             }
+            if(q==NULL) break;
             p=p->sig;
         }
         if(q!=NULL){//en caso termine de recorrer la Lista L1 y aun hay elementos sin colocar, estos deben ir al final de la lista L1:

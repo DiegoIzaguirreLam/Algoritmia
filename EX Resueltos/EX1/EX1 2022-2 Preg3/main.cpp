@@ -42,6 +42,7 @@ void imprimeFinal(Nodo *p){
     imprimeFinal(p->sig);
 }
 
+
 void criba( Lista &L1, Nodo *p, int n){
     if(p->elem*p->elem>n || p==NULL){
         imprimeFinal(p);
