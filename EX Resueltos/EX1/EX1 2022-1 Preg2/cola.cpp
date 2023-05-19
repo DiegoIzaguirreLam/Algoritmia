@@ -110,12 +110,6 @@ void encolar( Cola *pC, Elemento e )
         if(esColaVacia(*pC)){
             pC->frente=p;
         }
-        else if(pC->ultV!=NULL && pC->ultV->sig == NULL){
-            pC->ultV->sig=p;
-        }
-        else if(pC->ultC!=NULL && pC->ultC->sig==NULL){
-            pC->ultC->sig=p;
-        }
         else{
             pC->final->sig=p;
         }

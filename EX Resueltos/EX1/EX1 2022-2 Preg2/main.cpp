@@ -48,6 +48,20 @@ void detecta(int frec[], int n){
             }
         }
     }
+    while(!esPilaVacia(p)){
+            j=desapilar(&p);
+            if(!esPilaVacia(p))
+                duracion = i-cima(p)-1;
+            else
+                duracion = j;
+            pfrec = frec[j];
+            pArea=duracion*pfrec;
+            if(pArea>maxArea){
+                maxArea=pArea;
+                maxDur=duracion;
+                maxFrec=frec[j];
+            }
+    }
     cout<<"Frecuencia maxima: "<<maxFrec<<" Duracion: "<<maxDur<<endl;
 }
 
