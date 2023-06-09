@@ -64,7 +64,6 @@ int maxintervalo(int ini, int fin, int arr[], int min){
 int main(){
 	int n=30;
 	int peso[n]={98, 95, 92, 89, 91, 92, 89, 89, 92, 93, 94, 92, 91, 90, 88, 88, 88, 89, 90, 91, 88, 88, 90, 90, 92, 89, 90, 88, 90, 91};
-
 	int valormin;
 	valormin=minvalor(0, n-1, peso);
 	

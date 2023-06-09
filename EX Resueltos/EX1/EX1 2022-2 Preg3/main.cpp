@@ -54,6 +54,7 @@ void criba( Lista &L1, Nodo *p, int n){
     cout<<"Numero procesado "<<p->elem<<endl;
     cout<<"Numeros tachados para el "<<p->elem<<": ";
     mostrar(C);
+    destruir(&C);
     criba( L1, p->sig, n);
 }
 

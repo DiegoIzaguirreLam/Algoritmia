@@ -53,32 +53,35 @@ void reordena(Cola &C){
             encolar(C, e);
     }
     //los A en la pila
+    if(C.cantB>0){
     while(C.cantA>0){
         e=desencolar(C);
         apilar(aux, e);
     }
-    while(!esPilaVacia(aux)){
-        e=desencolar(C);
-        if(e.nOrd==top(aux).nOrd){
-            eAux=desapilar(aux);
-            encolar(C, eAux);
-            encolar(C, e);
-            numRot=0;
+        while(!esPilaVacia(aux)){
+            e=desencolar(C);
+            if(e.nOrd==top(aux).nOrd){
+                eAux=desapilar(aux);
+                encolar(C, eAux);
+                encolar(C, e);
+                numRot=0;
+            }
+            else if(numRot==C.cantB){//si ya se revisaron todos los B y ninguno es igual al mayor A en la pila, entonces hay mas A que B, por lo tanto hay que encolar el B y luego el A en la cima
+                encolar(C, e);
+                eAux=desapilar(aux);
+                encolar(C, eAux);
+                numRot=0;
+            }
+            else{
+                encolar(C, e);
+                numRot++;//cuenta cuantos B ya se van revisando
+            }
         }
-        else if(numRot==C.cantB){//si ya se revisaron todos los B y ninguno es igual al mayor A en la pila, entonces hay mas A que B, por lo tanto hay que encolar el B y luego el A en la cima
+
+        while(verFrente(C).tipo!='A' || verFrente(C).nOrd!=1){
+            e=desencolar(C);
             encolar(C, e);
-            eAux=desapilar(aux);
-            encolar(C, eAux);
-            numRot=0;
         }
-        else{
-            encolar(C, e);
-            numRot++;//cuenta cuantos B ya se van revisando
-        }
-    }
-    while(verFrente(C).tipo!='A' || verFrente(C).nOrd!=1){
-        e=desencolar(C);
-        encolar(C, e);
     }
 }
 

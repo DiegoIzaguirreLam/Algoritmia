@@ -76,6 +76,7 @@ void encolar( Cola *pC, Elemento e )
             pC->frente=p;
         }
         else if(pC->ultV!=NULL){
+            if(pC->ultV->sig==NULL) pC->final = p;
             p->sig=pC->ultV->sig;
             pC->ultV->sig=p;
         }
@@ -94,10 +95,12 @@ void encolar( Cola *pC, Elemento e )
             pC->frente=p;
         }
         else if(pC->ultV!=NULL && pC->ultC==NULL){
+            if(pC->ultV->sig==NULL) pC->final = p;
             p->sig=pC->ultV->sig;
             pC->ultV->sig=p;
         }
         else if(pC->ultC!=NULL){
+            if(pC->ultC->sig==NULL) pC->final = p;
             p->sig=pC->ultC->sig;
             pC->ultC->sig=p;
         }

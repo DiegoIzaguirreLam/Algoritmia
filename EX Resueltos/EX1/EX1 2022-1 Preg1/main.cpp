@@ -37,12 +37,11 @@ void cargarContenedor(Pila &contenedor){
 
 void apila_enCaja(Pila &cajai, Elemento e, int c){
     Elemento temp;
-    temp=desapilar(&cajai);
     if(esPilaVacia(cajai) || e.fechaCad<cima(cajai).fechaCad){
         apilar(&cajai, e);
-        apilar(&cajai, temp);
         return;
     }
+    temp=desapilar(&cajai);
     apila_enCaja(cajai, e, c);   
     apilar(&cajai, temp);
 }
