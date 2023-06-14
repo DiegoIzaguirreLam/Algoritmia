@@ -56,7 +56,7 @@ void rectangulos(int n,int m, int c,int mapa[][MAX], int x, int y, int cont){
 			for(int j=0;j<8;j++){
 				if(mapa[x1+mov[j][0]][y1+mov[j][1]]==0) rectangulos(n, m, c, mapa, x1+mov[j][0],y1+mov[j][1],cont+1);
 			}
-    		for(int j=1;j<c;j++){//borra el rectangulo (retrocede?)
+    		for(int j=1;j<c;j++){//borra el rectangulo
     			mapa[x1][y1]=0;
     			x1=x1-mov[i][0];
 				y1=y1-mov[i][1];
