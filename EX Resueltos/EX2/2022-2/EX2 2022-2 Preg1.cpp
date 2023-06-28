@@ -36,6 +36,9 @@ int asignaPersonas(int edades[],int n,int c,int t,int p,int v,int solu[][MAX],in
                 if(i==0) promT+=solu[i][j];
                 if(i==2) promP+=solu[i][j];
                 if(i==3) promV+=solu[i][j];
+                promT/=c;
+                promP/=c;
+                promV/=c;
             }
                 
             cout<<endl;
