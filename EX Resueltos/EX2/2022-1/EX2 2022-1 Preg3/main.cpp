@@ -103,11 +103,20 @@ int procesaIntento(ABB A1, char intento[], int nLetras, int iIntento, int nInten
     }
 }
 
+void imprimeEspacios(int nLetras, int i){
+    if(i<nLetras){
+        cout<<"_ ";
+        imprimeEspacios(nLetras, i+1);
+    }
+}
+
 void procesaJuego(ABB A1,char intento[],int nLetras){
     int nIntentos=5;
     cout<<"BIENVENIDO AL JUEGO DE BALWORD"<<endl;
     cout<<"Descubre la palabra de "<<nLetras<<" letras. Tiene como máximo "<<nIntentos<<" intentos."<<endl;
-    cout<<"_ _ _ _ _"<<endl;
+    //cout<<"_ _ _ _ _"<<endl;
+    imprimeEspacios(nLetras, 0);
+    cout<<endl;
     int i=1;
     if(procesaIntento(A1, intento, nLetras, i, nIntentos)){
         cout<<endl<<"Felicitaciones por haber resuelto el reto."<<endl;

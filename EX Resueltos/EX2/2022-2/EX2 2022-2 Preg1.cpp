@@ -3,7 +3,9 @@
 
 using namespace std;
 
-int mejorPromT=9999999, mejorPromP=999999, mejorPromV=999999;
+double mejorPromT=9999999, mejorPromP=999999, mejorPromV=999999, mejorProm=99999;
+
+int mejorSol[3][MAX]={};
 
 int valida(int flagGrupo,int c,int indTrib,int indPref,int indVIP, int &ind){
     if(flagGrupo==0){
@@ -29,22 +31,29 @@ int valida(int flagGrupo,int c,int indTrib,int indPref,int indVIP, int &ind){
 
 int asignaPersonas(int edades[],int n,int c,int t,int p,int v,int solu[][MAX],int indPersona,int indTrib,int indPref,int indVIP ){
     if(indPersona==n){
-        int promT, promP, promV;
+        double promT=0, promP=0, promV=0, prom=0;
         for(int i=0;i<3;i++){
             for(int j=0;j<c;j++){
-                cout<<solu[i][j]<<" ";
                 if(i==0) promT+=solu[i][j];
-                if(i==2) promP+=solu[i][j];
-                if(i==3) promV+=solu[i][j];
-                promT/=c;
-                promP/=c;
-                promV/=c;
+                if(i==1) promP+=solu[i][j];
+                if(i==2) promV+=solu[i][j];
             }
-                
-            cout<<endl;
         }
-        cout<<endl;
-        return 1;
+		promT/=c;
+		promP/=c;
+        promV/=c;
+		prom = (promT+promP+promV)/3;
+        if(prom<mejorProm){
+			for(int i=0;i<3;i++){
+				for(int j=0;j<c;j++){
+					mejorSol[i][j]=solu[i][j];
+				}
+			}
+			mejorPromT=promT;
+			mejorPromP=promP;
+			mejorPromV=promV;
+		}
+        return 0;
     }
     int ind, usaSillaT, usaSillaP, usaSillaV;
     for(int i=0;i<3;i++){//lo intento poner en cada una
@@ -81,6 +90,15 @@ int main(){
     int solu[3][MAX]={};
     
     asignaPersonas(edades, n, c, t, p, v, solu, 0, 0, 0, 0);
-    
+    for(int i=0;i<3;i++){
+    	for(int j=0;j<c;j++){
+    		cout<<mejorSol[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Promedio de edades en Tribuna: "<<mejorPromT<<endl;
+	cout<<"Promedio de edades en Preferencial: "<<mejorPromP<<endl;
+	cout<<"Promedio de edades en Vip: "<<mejorPromV<<endl;
+	
     return 0;
 }
