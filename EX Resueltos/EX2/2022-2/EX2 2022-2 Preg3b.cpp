@@ -22,7 +22,7 @@ int hallarpeso(int ind, int n, int peso, int paq[], int tomados[], int pallets[]
     if(ind==n || peso<0 || indPeso==M)
         return 0;
 
-    if(paq[ind]==peso && !tomados[ind]){
+    if(paq[ind]==peso && !tomados[ind]){//se termina de llenar el pallet y se pasa al siguiente pallet
         pallets[indPallet][indPeso]=paq[ind];
         tomados[ind]=1;
         if(hallarpeso(0, n, pesoObj, paq, tomados, pallets, indPallet+1, 0, M, N, pesoObj)){
@@ -71,7 +71,6 @@ int main(){
     else{
         cout<<"La cantidad de pallets debe ser igual a N*M"<<endl;
     }
-    
     return 0;
 }
 
