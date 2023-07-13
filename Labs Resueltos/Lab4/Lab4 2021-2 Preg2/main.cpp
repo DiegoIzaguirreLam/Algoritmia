@@ -124,6 +124,25 @@ void mostrarAmplitud(ABB parbol){
     }
 }
 
+int filtraPrecio(ABB A1, int precio){
+    if(A1){
+        int cont=0;
+        if(A1->elem.precio>=precio){
+            filtraPrecio(A1->hizq, precio);
+        }
+        else{
+            cont += filtraPrecio(A1->hizq, precio);
+            cont += filtraPrecio(A1->hder, precio);
+        }
+        if(A1->elem.precio<=precio){
+            cout<<A1->elem.nombre<<"-"<<A1->elem.precio<<" ";
+            return cont+1;
+        }
+        else return cont;
+    }
+    return 0;
+}
+
 int main(int argc, char** argv) {
     ABB A1;
     crearArbol(A1);
@@ -137,6 +156,11 @@ int main(int argc, char** argv) {
     mostrarEnPreOrden(A1);
     cout<<endl;
     mostrarAmplitud(A1);
+    int precio=160;
+    /*cout<<"Ingrese precio para filtrar los productos: ";
+    cin>>precio;*/
+    cout<<endl<<endl;
+    cout<<endl<<"Se encontraron "<<filtraPrecio(A1, precio)<<" resultados"<<endl;
     return 0;
 }
 
