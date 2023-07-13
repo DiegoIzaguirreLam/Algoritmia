@@ -5,7 +5,10 @@
 
 using namespace std;
 
-typedef int Elemento;
+typedef struct{
+    char nombre;
+    int precio;
+} Elemento;
 
 typedef struct nodo
 {   Elemento elem;      // dato

@@ -30,12 +30,12 @@ void insertar( ABB &pA, Elemento e )
         while ( q != NULL )
         {
             pq = q;
-            if ( e < q->elem )
+            if ( e.precio < q->elem.precio )
                 q = q->hizq;
             else
                 q = q->hder;
         }
-        if ( e < pq->elem )
+        if ( e.precio < pq->elem.precio )
             pq->hizq = p;
         else
             pq->hder = p;
@@ -57,7 +57,7 @@ void mostrarEnOrden( NodoABB *pR )  // pR: puntero a la raiz del árbol
         pAI = pR->hizq;
         pAD = pR->hder;
         mostrarEnOrden( pAI);  // se recorre en orden el subarbol izquierdo
-        cout << pR->elem << " ";  // se visita la raiz
+        cout << pR->elem.nombre << "-" <<pR->elem.precio<<" ";  // se visita la raiz
         mostrarEnOrden( pAD);  // se recorre en orden el subarbol derecho
     }
 }
@@ -70,7 +70,7 @@ void mostrarEnPreOrden( NodoABB *pR )  // pR: puntero a la raiz del árbol
     {
         pAI = pR->hizq;
         pAD = pR->hder;
-        cout << pR->elem << " ";  // se visita la raiz
+        cout << pR->elem.nombre << "-" <<pR->elem.precio<<" ";   // se visita la raiz
         mostrarEnPreOrden( pAI);  // se recorre en preorden el subarbol izquierdo
         mostrarEnPreOrden( pAD);  // se recorre en preorden el subarbol derecho
     }
@@ -86,28 +86,29 @@ void mostrarEnPostOrden( NodoABB *pR )  // pR: puntero a la raiz del árbol
         pAD = pR->hder;
         mostrarEnPostOrden( pAI);  // se recorre en postorden el subarbol izquierdo
         mostrarEnPostOrden( pAD);  // se recorre en postorden el subarbol derecho
-        cout << pR->elem << " ";   // se visita la raiz
+        cout << pR->elem.nombre << "-" <<pR->elem.precio<<" ";    // se visita la raiz
     }
 }
 
 // retorna true si el elemento e se encuentra en el árbol
 // retorne false en caso contrario
+/*
 bool buscar( NodoABB *pR, Elemento e )
 {
     NodoABB *p;
     p = pR;
     while ( p != NULL )
     {
-        if ( e == p->elem )  // si lo encuentra retorna true
+        if ( e. == p->elem )  // si lo encuentra retorna true
             return true;
         else
-            if ( e < p->elem )
+            if ( e.precio < p->elem.precio )
                 p = p->hizq;   // continua la búsqueda en el subárbol izquierdo
             else
                 p = p->hder;   // continua la búsqueda en el subárbol derecho
     }
     return false;  // si no lo encuentra retorna false
-}
+}*/
 
 // retorna el valor del elemento menor del árbol
 // el menor siempre se encuentra en el extremo izquierdo del árbol
@@ -147,7 +148,7 @@ int contarNodos( NodoABB *pR )
         return nodosAI + nodosAD + 1;  // le suma 1 ( el nodo raiz )
     }
 }
-
+/*
 // retorna la suma de los datos contenidos en el árbol
 int sumarNodos( NodoABB *pR )
 {
@@ -164,7 +165,7 @@ int sumarNodos( NodoABB *pR )
         return sumaAI + sumaAD + pR->elem;  // le suma el dato contenido en la raiz
     }
 }
-
+*/
 
 int es_arbol_vacio(ABB tad){
     return tad==NULL;

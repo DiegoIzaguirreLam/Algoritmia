@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /* 
  * File:   main.cpp
@@ -16,109 +11,122 @@
 #include "cola.h"
 using namespace std;
 
-int altura(ABB parbol){
-    if(parbol==NULL) return 0;
-    return max(altura(parbol->hizq), altura(parbol->hder))+1;
+
+void crearArbol(ABB &A1){
+    construir(A1);
+    Elemento e;
+    e.nombre='A'; e.precio=190;
+    insertar(A1, e);
+    e.nombre='C'; e.precio=180;
+    insertar(A1, e);
+    e.nombre='G'; e.precio=150;
+    insertar(A1, e);
+    e.nombre='B'; e.precio=100;
+    insertar(A1, e);
+    e.nombre='M'; e.precio=20;
+    insertar(A1, e);
+    e.nombre='P'; e.precio=140;
+    insertar(A1, e);
+    e.nombre='Q'; e.precio=210;
+    insertar(A1, e);
+    
+    
 }
 
-void rota_der(ABB &A1){
-    ABB t=A1->hizq;
-    A1->hizq = t->hder;
-    t->hder = A1;
-    A1 = t;
+int alturaNodo(ABB A1){
+    if(!A1) return 0;
+    return max(alturaNodo(A1->hizq), alturaNodo(A1->hder))+1;
 }
 
-void rota_izq(ABB &A1){
-    ABB t=A1->hder;
-    A1->hder = t->hizq;
-    t->hizq = A1;
-    A1 = t;
+void rotacionDerecha(ABB &A1){
+    ABB t = A1;
+    A1 = A1->hizq;
+    t->hizq = A1->hder;
+    A1->hder = t;
 }
+
+void rotacionIzquierda(ABB &A1){
+    ABB t = A1;
+    A1 = A1->hder;
+    t->hder = A1->hizq;
+    A1->hizq = t;
+}
+
 
 void balancea(ABB &A1){
-    if(A1==NULL) return;
-    balancea(A1->hizq);
-    balancea(A1->hder);
-    int altIzq, altDer;
-    altIzq=altura(A1->hizq);
-    altDer=altura(A1->hder);
-    if(abs(altIzq-altDer)>1){
-        if (altIzq > altDer){//desbalanceo a la izquierda
-            if(altura(A1->hizq->hizq)>=altura(A1->hizq->hder)){
-                rota_der(A1);
-            }
-            else{
-                rota_izq(A1->hizq);
-                rota_der(A1);
-            }
-        }
-        else{//desbalanceo a la derecha
-            if(altura(A1->hder->hder)>=altura(A1->hder->hizq)){
-                rota_izq(A1);
-            }
-            else{
-                rota_der(A1->hder);
-                rota_izq(A1);
-            }
-        }
-    }
+   if(A1){
+       balancea(A1->hizq);
+       balancea(A1->hder);
+       int altIzq, altDer, dif;
+       altIzq=alturaNodo(A1->hizq);
+       altDer=alturaNodo(A1->hder);
+       dif=abs(altIzq-altDer);
+       if(dif>1){
+           if(altIzq>altDer){
+               if(alturaNodo(A1->hizq->hizq) >= alturaNodo(A1->hizq->hder)){//balanceo normal, rot der
+                   rotacionDerecha(A1);
+               }
+               else{//doble rotder
+                   rotacionIzquierda(A1->hizq);
+                   rotacionDerecha(A1);
+               }
+           }
+           else{
+               if(alturaNodo(A1->hder->hder) >= alturaNodo(A1->hder->hizq)){//balanceo normal, rot izq
+                   rotacionIzquierda(A1);
+               }
+               else{//doble rot izq
+                   rotacionDerecha(A1->hder);
+                   rotacionIzquierda(A1);
+               }
+           }
+       }
+   } 
 }
 
-ABB busca(ABB parbol, Elemento e){
+ABB busca(ABB parbol, int precio){
     if(parbol==NULL) return NULL;
-    if(parbol->elem == e) return parbol;
+    if(parbol->elem.precio == precio) return parbol;
     else
-        if(parbol->elem > e)
-            return busca(parbol->hizq, e);
+        if(parbol->elem.precio > precio)
+            return busca(parbol->hizq, precio);
         else
-            return busca(parbol->hder, e);
+            return busca(parbol->hder, precio);
 }
-int hallaNivel(ABB parbol, Elemento e){
-    ABB paux=parbol;
-    int cont=0;
-    while(paux!=NULL){
-        if(paux->elem > e ){
-            paux = paux->hizq;
-        }
-        else if(paux->elem < e){
-            paux = paux->hder;
-        }
-        else
-            return cont;
-        cont++;
-    }
-    return cont;
-}
+
 void mostrarAmplitud(ABB parbol){
     if(parbol==NULL) return;
     Cola C;
     construir(C);
-    Elemento e=parbol->elem;
-    encolar(C, parbol->elem);
+    ElementoC e;
+    e.nodo=parbol;
+    e.nivel=1;
+    encolar(C, e);
     ABB temp;
-    int eAlt, antAltura;
-    antAltura = hallaNivel(parbol, e);
+    int nivel=1;
     while(!esColaVacia(C)){
         e=desencolar(C);
-        temp = busca(parbol, e);
-        eAlt = hallaNivel(parbol, e);
-        if(eAlt!=antAltura){
-            antAltura = eAlt;
+        temp = e.nodo;
+        if(e.nivel>nivel){
+            nivel = e.nivel;
             cout<<endl;
         }
-        cout<<e<<" ";
-        if(temp->hizq!=NULL) encolar(C, temp->hizq->elem);
-        if(temp->hder!=NULL) encolar(C, temp->hder->elem);
+        cout<<temp->elem.nombre<<"-"<<temp->elem.precio<<" ";
+        e.nivel = e.nivel+1;
+        if(temp->hizq!=NULL){
+            e.nodo = temp->hizq;
+            encolar(C, e);
+        }
+        if(temp->hder!=NULL){
+            e.nodo = temp->hder;
+            encolar(C, e);
+        }
     }
 }
 
 int main(int argc, char** argv) {
     ABB A1;
-    construir(A1);
-    int arr[]={3, 2, 1, 72, 14, 36, 81, 9, 65, 43, 27, 50, 68, 30, 79, 5, 93, 61, 17, 48, 88, 38, 23};
-    int n=sizeof(arr)/sizeof (arr[0]);
-    for(int i=0;i<n;i++) 
-        insertar(A1, arr[i]);
+    crearArbol(A1);
     mostrarEnPreOrden(A1);
     //mostrarEnPreOrden(A1);
     cout<<endl;

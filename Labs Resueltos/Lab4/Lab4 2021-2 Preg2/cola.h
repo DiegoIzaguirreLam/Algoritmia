@@ -2,14 +2,17 @@
 #define COLA_H
 
 #include <iostream>
-
+#include "abb.h"
 using namespace std;
 
-typedef int Elemento;
+typedef struct{
+    ABB nodo;
+    int nivel;
+} ElementoC;
 
 typedef struct nodoC
 {
-    Elemento elem;  // el dato que almacena el nodo
+    ElementoC elem;  // el dato que almacena el nodo
     struct nodoC *sig;  // sig es la dirección del siguiente nodo
 } NodoC;
 
@@ -23,10 +26,10 @@ typedef struct
 void construir( Cola &pC );
 bool esColaVacia( Cola C );
 int obtenerLongitud( Cola C );
-NodoC* crearNodo( Elemento e, NodoC *s );
-void encolar( Cola &pC, Elemento e );
+NodoC* crearNodo( ElementoC e, NodoC *s );
+void encolar( Cola &pC, ElementoC e );
 void mostrar( Cola C );
-Elemento desencolar( Cola &pC );
+ElementoC desencolar( Cola &pC );
 void destruir( Cola &pC );
 
 #endif /* COLA_H */

@@ -20,7 +20,7 @@ int obtenerLongitud( Cola C )
     return C.longitud;
 }
 
-NodoC* crearNodo( Elemento e, NodoC *s )
+NodoC* crearNodo( ElementoC e, NodoC *s )
 {
     NodoC *p;
     p = new NodoC; // se crea un nodo y su direccion se almacena en p
@@ -29,7 +29,7 @@ NodoC* crearNodo( Elemento e, NodoC *s )
     return p;  // retorna la dirección del nodo creado
 }
 
-void encolar( Cola &pC, Elemento e )
+void encolar( Cola &pC, ElementoC e )
 {
     NodoC *p, *pU;
     p = crearNodo( e, NULL);
@@ -45,7 +45,7 @@ void encolar( Cola &pC, Elemento e )
     pC.final = p;
     pC.longitud++;
 }
-
+/*
 void mostrar( Cola C )
 {
     NodoC *p;
@@ -62,11 +62,11 @@ void mostrar( Cola C )
         cout << endl;
     }
 }
-
+*/
 // esta funcion solo sera invocada previa verificacion de que la cola no esta vacia
-Elemento desencolar( Cola &pC )
+ElementoC desencolar( Cola &pC )
 {
-    Elemento x;
+    ElementoC x;
     NodoC *p;
     p = pC.frente;
     if ( p->sig == NULL ) // hay un solo nodo en la Cola
