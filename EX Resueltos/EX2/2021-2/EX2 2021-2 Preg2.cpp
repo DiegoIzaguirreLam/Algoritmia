@@ -21,8 +21,8 @@ int vuelodron(int alma[][col],int x,int y){
 			if(i==1 && j==1) dp[i][j]=0;
 			else{
 				dia = dp[i-1][j-1] + calcula(i-1, j-1, alma[i-1][j-1], alma);
-				arr = dp[i-1][j] + calcula(i-1, j, alma[i-1][j], alma);
-				izq = dp[i][j-1] + calcula(i, j-1, alma[i-1][j], alma);
+				arr = dp[i-1][j] + calcula(i-1, j, alma[i-1][j-1], alma);
+				izq = dp[i][j-1] + calcula(i, j-1, alma[i-1][j-1], alma);
 				dp[i][j] = min(dia,min(arr, izq));
 			}
 		}
