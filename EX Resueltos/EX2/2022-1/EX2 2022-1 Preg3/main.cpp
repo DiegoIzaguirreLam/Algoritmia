@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /* 
  * File:   main.cpp
@@ -124,7 +119,6 @@ void procesaJuego(ABB A1,char intento[],int nLetras){
     else
         cout<<endl<<"Lo siento, se agotaron los intentos"<<endl;
 }
-
 
 int main(int argc, char** argv) {
     ABB A1;
